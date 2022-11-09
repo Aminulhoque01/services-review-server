@@ -45,6 +45,11 @@ async function run(){
             res.send({token})
         })
         
+        app.post('/add',async(req,res)=>{
+            const add = req.body;
+            const result = await serviceCollection.insertOne(add);
+            res.send(result);
+        })
         
         app.get('/HomeServices', async(req,res)=>{
             const query = {};
