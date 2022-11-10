@@ -49,7 +49,9 @@ async function run(){
             const add = req.body;
             const result = await serviceCollection.insertOne(add);
             res.send(result);
-        })
+        });
+
+        
         
         app.get('/HomeServices', async(req,res)=>{
             const query = {};
@@ -101,6 +103,15 @@ async function run(){
             res.send(result)
         });
         
+        
+
+        app.get('/reviews/:id', async(req,res)=>{
+            const id = req.params.id;
+            const query={ _id: ObjectId(id)}
+            const result = await reviewCollection.findOne(query);
+            res.send(result);
+        });
+
         app.put('/reviews/:id', async(req,res)=>{
             const id = req.params.id;
             
@@ -121,14 +132,7 @@ async function run(){
             }
             const result= await reviewCollection.updateOne(filter,updateReview,options);
             res.send(result)
-        })
-
-        app.get('/reviews/:id', async(req,res)=>{
-            const id = req.params.id;
-            const query={ _id:ObjectId(id)}
-            const result = await reviewCollection.findOne(query);
-            res.send(result);
-        })
+        });
         
         app.delete('/reviews/:id', async(req,res)=>{
             const id = req.params.id;
